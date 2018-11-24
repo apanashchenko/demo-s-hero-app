@@ -32,8 +32,8 @@ public class HeroService {
         return heroRepository.findByStatus(status);
     }
 
-    public Long add(Hero hero) {
-        return heroRepository.save(hero).getId();
+    public Hero add(Hero hero) {
+        return heroRepository.save(hero);
     }
 
 

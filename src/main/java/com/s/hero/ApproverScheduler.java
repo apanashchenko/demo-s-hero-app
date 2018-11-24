@@ -11,8 +11,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import static com.s.hero.MessageStatus.*;
 
@@ -37,14 +35,6 @@ public class ApproverScheduler {
 
 
     private void processRequest(Hero hero) {
-        int waitTime = getRandomSleep(10, 3);
-        log.info("Sleep time {}", waitTime);
-        try {
-            Thread.sleep(TimeUnit.SECONDS.toMillis(waitTime));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         switch (hero.getStatus()) {
             case REQUESTED:
                 Optional<RequestMessage> requestMessage = requestMessageService.findByHeroIdAndStatus(hero.getId(), REQUESTED);
@@ -111,12 +101,5 @@ public class ApproverScheduler {
         }
 
     }
-
-
-    private int getRandomSleep(int maximum, int minimum) {
-        Random rand = new Random();
-        return rand.nextInt((maximum - minimum) + 1) + minimum;
-    }
-
 
 }

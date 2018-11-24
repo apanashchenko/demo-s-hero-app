@@ -26,7 +26,7 @@ public class Hero {
     @ApiModelProperty(example = "Requested")
     private String status;
     private String authorComment;
-    private String arproveeComment;
+    private String arproverComment;
     @ApiModelProperty(hidden = true)
     @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JoinColumn(name = "heroId")

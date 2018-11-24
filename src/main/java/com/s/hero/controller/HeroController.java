@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -26,7 +25,7 @@ public class HeroController {
 
     @RequestMapping(value = "/hero", method = RequestMethod.POST)
     public ResponseEntity createHero(@RequestBody Hero hero) {
-        return new ResponseEntity<>(Collections.singletonMap("id", heroService.add(hero)), HttpStatus.OK);
+        return new ResponseEntity<>(heroService.add(hero), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/heroresponse/{id}", method = RequestMethod.POST)
@@ -35,8 +34,8 @@ public class HeroController {
         if (hero.isPresent()) {
             Hero upHero = hero.get();
             upHero.setStatus(updateHero.getStatus());
-            upHero.setArproveeComment(updateHero.getArproveeComment());
-            return new ResponseEntity<>(Collections.singletonMap("id", heroService.add(upHero)), HttpStatus.OK);
+            upHero.setArproverComment(updateHero.getArproverComment());
+            return new ResponseEntity<>(heroService.add(upHero), HttpStatus.OK);
         }
         return  new ResponseEntity<>("Hero with id " + id + " not found", HttpStatus.NOT_FOUND);
     }
