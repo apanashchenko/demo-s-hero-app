@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 
 /**
@@ -26,6 +28,13 @@ public class HeroService {
 
     public Iterable<Hero> findAll() {
         return heroRepository.findAll();
+    }
+
+    public Iterable<Hero> findAllActive() {
+        return StreamSupport
+                .stream(heroRepository.findAll().spliterator(), false)
+                .filter(hero -> hero.getMessages().size() !=0 )
+                .collect(Collectors.toList());
     }
 
     public List<Hero> findByStatus(String status) {

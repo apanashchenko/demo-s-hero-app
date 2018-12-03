@@ -20,7 +20,7 @@ public class HeroController {
 
     @RequestMapping(value = "/heroes", method = RequestMethod.GET)
     public ResponseEntity getAllHeroes() {
-        return new ResponseEntity<>(heroService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(heroService.findAllActive(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/hero", method = RequestMethod.POST)
